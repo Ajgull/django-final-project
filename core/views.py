@@ -4,8 +4,8 @@ from core.forms import UserRegistrationForm
 from django.views import View
 
 class FirstView(View):
-    def Rec(request: HttpRequest) -> HttpResponse:
-        return HttpResponse('Hello world!')
+    def get(self, request: HttpRequest) -> HttpResponse:
+        return render(request, 'WebsiteHTMLs/first_page.html')
 
 class RegisterView(View):
     def get(self, request: HttpRequest) -> HttpResponse:
