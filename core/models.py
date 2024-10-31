@@ -4,9 +4,7 @@ from django.db import models
 
 class Profile(models.Model):
     bio = models.CharField(verbose_name='about user', max_length=255, blank=True)
-
     registrated_at = models.DateField(auto_now_add=True)  # метка при создании
-
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
