@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Profile(models.Model):
-    bio = models.CharField(verbose_name='about user', max_length=255, blank=True)
+    bio = models.TextField(verbose_name='about user', blank=True)
     registrated_at = models.DateField(auto_now_add=True)  # метка при создании
     user = models.OneToOneField(
         User,
@@ -17,7 +17,7 @@ class Profile(models.Model):
         ordering = ['user']  # сортировка по
 
     def __str__(self) -> str:
-        return f'{self.user.username} : {self.bio}'
+        return f'{self.user.username} : {self.bio[:20]}'
 
 
 class Post(models.Model):
@@ -37,7 +37,7 @@ class Post(models.Model):
         ordering = ['-written_at']  # сортировка по новым постам
 
     def __str__(self) -> str:
-        return f'{self.author.username} : {self.text}'
+        return f'{self.author.username} : {self.text[:100]}'
 
 
 class Comment(models.Model):
@@ -60,7 +60,7 @@ class Comment(models.Model):
         ordering = ['-written_at']
 
     def __str__(self) -> str:
-        return f'{self.author.username} : {self.text}'
+        return f'{self.author.username} : {self.text[:100]}'
 
 
 class Like(models.Model):
@@ -84,4 +84,4 @@ class Like(models.Model):
         ordering = ['-liked_at']
 
     def __str__(self) -> str:
-        return f'{self.author.username} liked {self.post.text}'
+        return f'{self.author.username} liked {self.post.text[:100]}'
